@@ -5,7 +5,6 @@ let sections = document.querySelectorAll("section"),
   headings = gsap.utils.toArray(".section-heading"),
   outerWrappers = gsap.utils.toArray(".outer"),
   innerWrappers = gsap.utils.toArray(".inner"),
-  splitHeadings = headings.map(heading => new SplitText(heading, { type: "chars,words,lines", linesClass: "clip-text" })),
   currentIndex = -1,
   wrap = gsap.utils.wrap(0, sections.length),
   animating;
@@ -35,19 +34,6 @@ function gotoSection(index, direction) {
       yPercent: 0 
     }, 0)
     .fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0)
-    .fromTo(splitHeadings[index].chars, { 
-        autoAlpha: 0, 
-        yPercent: 150 * dFactor
-    }, {
-        autoAlpha: 1,
-        yPercent: 0,
-        duration: 1,
-        ease: "power2",
-        stagger: {
-          each: 0.02,
-          from: "random"
-        }
-      }, 0.2);
 
   currentIndex = index;
 }
@@ -62,6 +48,3 @@ Observer.create({
 });
 
 gotoSection(0, 1);
-
-// original: https://codepen.io/BrianCross/pen/PoWapLP
-// horizontal version: https://codepen.io/GreenSock/pen/xxWdeMK
